@@ -2,7 +2,7 @@
   <div class="main">
     <div class="mainbox" >
       <ul class="clearfix">
-        <li v-for="(item, i) in list" :class="{current: i===0}" >{{item.name}}</li>
+        <li v-for="(item, i) in list" :key="i" :class="{current: i===0}" >{{item.name}}</li>
       </ul>
       <div class="echartsbox" id="echartsbox" ></div>
     </div>

@@ -1,58 +1,82 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="main">
+    <div class="mainbox" >
+      <ul class="clearfix">
+        <li v-for="(item, i) in list" :class="{current: i===0}" >{{item.name}}</li>
+      </ul>
+      <div class="echartsbox" id="echartsbox" ></div>
+    </div>
   </div>
 </template>
 
 <script>
+import echarts from "echarts"
+import option from '../modules/data.js'
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  name: 'index',
+  data () {
+    return {
+      list: [
+        {name: '入口区群体分布'},
+        {name: '购物区群体分布'},
+        {name: '娱乐区群体分布'},
+        {name: '餐饮区群体分布'},
+        {name: '休闲区群体分布'},
+        {name: '服务区群体分布'}
+      ]
+    }
+  },
+  mounted () {
+    this.initEcharts()
+  },
+  methods: {
+    initEcharts: function () {
+      let myChart = echarts.init(document.getElementById('echartsbox'))
+      myChart.setOption(option)
+
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style >
+.main{
+  background: #000;
+  padding:20px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  .mainbox{
+    width:900px;
+    background: #000;
+    
+  } 
+  .mainbox ul{
+    color:#30a9ee;
+    position: relative;
+    top:3px;
+    z-index:1;
+    border-left:#4a5d59 solid 3px;
+  }
+  .mainbox ul li{
+    float:left;
+    line-height: 40px;
+    padding:0 15px;
+    text-align:center;
+    border-bottom:transparent solid 3px;
+    border-right:#4a5d59 solid 3px;
+    border-top:#4a5d59 solid 3px;
+    border-right:#4a5d59 solid 3px;
+  }
+  .mainbox ul li.current{
+    border-bottom:#000 solid 3px;
+  }
+  .echartsbox{
+    width:100%;
+    height:400px;
+    padding-top:50px;
+    padding:20px;
+    box-sizing: border-box;
+    border:#4a5d59 solid 3px;
+  }
 </style>

@@ -1,4 +1,4 @@
-# bim-demo-1
+# bim-demo
 
 ## Project setup
 ```
